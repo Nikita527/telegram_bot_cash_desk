@@ -1,8 +1,12 @@
 from aiogram import Dispatcher, F, types
 from aiogram.fsm.context import FSMContext
 from handlers.create_requests import RequestStates
-from handlers.ultils import (PAGE_SIZE, create_change_button,
-                             create_navigation_buttons, create_pay_button)
+from handlers.ultils import (
+    PAGE_SIZE,
+    create_change_button,
+    create_navigation_buttons,
+    create_pay_button,
+)
 from models.crud import get_unpaid_cash_request, get_unpaid_no_cash_request
 from sqlalchemy.orm import Session
 

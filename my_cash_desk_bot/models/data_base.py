@@ -1,8 +1,16 @@
 import os
 
 from dotenv import load_dotenv
-from sqlalchemy import (BigInteger, Boolean, Column, ForeignKey, Integer,
-                        String, create_engine, event)
+from sqlalchemy import (
+    BigInteger,
+    Boolean,
+    Column,
+    ForeignKey,
+    Integer,
+    String,
+    create_engine,
+    event,
+)
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker

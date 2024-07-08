@@ -75,19 +75,21 @@ def create_navigation_buttons(
 ) -> types.InlineKeyboardMarkup:
     """Создание кнопок навигации для пагинации"""
 
-    navigation_keyboard = types.InlineKeyboardMarkup()
+    buttons = []
     if page > 0:
-        navigation_keyboard.add(
+        buttons.append(
             types.InlineKeyboardButton(
                 text="Назад", callback_data=f"{prefix}_page_{page - 1}"
             )
         )
     if (page + 1) * PAGE_SIZE < total_requests:
-        navigation_keyboard.add(
+        buttons.append(
             types.InlineKeyboardButton(
                 text="Вперед", callback_data=f"{prefix}_page_{page + 1}"
             )
         )
+
+    navigation_keyboard = types.InlineKeyboardMarkup(inline_keyboard=[buttons])
     return navigation_keyboard
 
 

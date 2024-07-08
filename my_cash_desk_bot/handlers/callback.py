@@ -3,11 +3,16 @@ import os
 from aiogram import Dispatcher, F, types
 from aiogram.fsm.context import FSMContext
 from handlers.create_requests import RequestStates
-from handlers.show_requests import (show_unpaid_cash_requests_handler,
-                                    show_unpaid_noncash_requests_handler)
-from models.crud import (get_cash_request, get_no_cash_request,
-                         update_cash_request_status,
-                         update_no_cash_request_status)
+from handlers.show_requests import (
+    show_unpaid_cash_requests_handler,
+    show_unpaid_noncash_requests_handler,
+)
+from models.crud import (
+    get_cash_request,
+    get_no_cash_request,
+    update_cash_request_status,
+    update_no_cash_request_status,
+)
 from sqlalchemy.orm import Session
 
 

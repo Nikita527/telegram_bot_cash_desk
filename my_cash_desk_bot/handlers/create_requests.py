@@ -4,8 +4,13 @@ from aiogram import Bot, Dispatcher, F, types
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from handlers.ultils import create_change_requests_buttons, notify_all_users
-from models.crud import (create_cash_request, create_counterparty,
-                         create_no_cash_request, get_counterparty, get_user)
+from models.crud import (
+    create_cash_request,
+    create_counterparty,
+    create_no_cash_request,
+    get_counterparty,
+    get_user,
+)
 from sqlalchemy.orm import Session
 
 MIME_TYPES = [
@@ -292,39 +297,6 @@ async def confirm_request_handler(
     await callback_query.answer()
 
 
-async def edit_request_handler(
-    callback_query: types.CallbackQuery, state: FSMContext
-):
-    """Редактирование заявки."""
-
-    field_to_edit = callback_query.data.split("_")[2]
-    if field_to_edit == "contractor":
-        await callback_query.message.answer("Введите новое имя контрагента:")
-        await state.set_state(RequestStates.entering_contractor_name)
-    elif field_to_edit == "amount":
-        await callback_query.message.answer("Введите новую сумму:")
-        await state.set_state(RequestStates.entering_amount)
-    elif field_to_edit == "phone":
-        await callback_query.message.answer(
-            "Введите новый номер телефона или номер банковской карты:"
-        )
-        await state.set_state(RequestStates.entering_phone_or_card)
-    elif field_to_edit == "bank":
-        await callback_query.message.answer(
-            "Введите новое наименование банка:"
-        )
-        await state.set_state(RequestStates.entering_bank_name)
-    elif field_to_edit == "comment":
-        await callback_query.message.answer("Введите новый комментарий:")
-        await state.set_state(RequestStates.entering_comment)
-    else:
-        await callback_query.message.answer(
-            "Неверный выбор. Пожалуйста, выберите предложенные поля."
-        )
-        await state.set_state(RequestStates.editing_request)
-    await callback_query.answer()
-
-
 def register_handlers_create_requests(dp: Dispatcher, bot: Bot):
     dp.message.register(create_request_handler, F.text == "Создать заявку")
     dp.message.register(
@@ -344,7 +316,4 @@ def register_handlers_create_requests(dp: Dispatcher, bot: Bot):
     dp.message.register(get_invoice_handler, RequestStates.uploading_invoice)
     dp.callback_query.register(
         confirm_request_handler, RequestStates.awaiting_confirmation
-    )
-    dp.callback_query.register(
-        edit_request_handler, RequestStates.editing_request
     )

@@ -8,6 +8,7 @@ from handlers.callback import register_handlers_callback
 from handlers.create_requests import register_handlers_create_requests
 from handlers.show_balance import reqister_handlers_show_balance
 from handlers.show_requests import register_handlers_show_requests
+from handlers.edit_requests import register_handlers_edit_request
 from handlers.start import DatabaseMiddleware, register_handlers_start
 
 logging.basicConfig(level=logging.INFO)
@@ -37,6 +38,7 @@ register_handlers_create_requests(dp, bot)
 register_handlers_show_requests(dp)
 register_handlers_callback(dp)
 reqister_handlers_show_balance(dp)
+register_handlers_edit_request(dp)
 
 
 async def on_startup(dp: Dispatcher):
